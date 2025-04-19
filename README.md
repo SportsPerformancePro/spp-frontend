@@ -1,4 +1,1 @@
-
-# Sports Performance Pro Frontend
-
-Vercel-ready React frontend.
+# Sports Performance Pro (Vite + React)
