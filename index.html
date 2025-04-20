@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sports Performance Pro</title>
-</head>
-<body>
-    <h1>Sports Performance Pro</h1>
-    <form id="upload-form">
-        <label>Select your sport:</label>
-        <select id="sport">
-            <option value="Golf">Golf</option>
-        </select><br><br>
-        <label>Upload your video(s):</label>
-        <input type="file" id="videos" multiple><br><br>
-        <label>Ask your AI Coach:</label>
-        <input type="text" id="prompt" size="60"><br><br>
-        <button type="submit">Submit to Xlevel Coach</button>
-    </form>
-    <h2>Coach Feedback:</h2>
-    <pre id="response"></pre>
-
-    <script src="main.js"></script>
-</body>
+    <link rel="stylesheet" href="/src/index.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

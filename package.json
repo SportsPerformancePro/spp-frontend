@@ -1,5 +1,5 @@
 {
-  "name": "spp-frontend",
+  "name": "spp-ui-upgrade",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
