@@ -1,5 +1,5 @@
 {
-  "name": "spp-frontend-zip3",
+  "name": "spp-zip3-final",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.7"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
