@@ -1,12 +1,13 @@
-import React from 'react';
+
+import React from 'react'
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <h1>Sports Performance Pro</h1>
-      <p>Upload video and get feedback.</p>
+      <p>Upload your video and get feedback.</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
