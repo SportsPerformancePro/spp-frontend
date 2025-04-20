@@ -1,1 +1,1 @@
-export default { root: './', build: { outDir: 'dist' } };
+// Placeholder content for vite.config.js
