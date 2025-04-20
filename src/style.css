@@ -2,13 +2,27 @@ body {
   font-family: Arial, sans-serif;
   background-color: #0a0f1c;
   color: #fff;
-  padding: 20px;
   margin: 0;
+  padding: 0;
 }
-h1 {
-  color: #4fe3c1;
+.container {
+  padding: 2rem;
 }
-.app {
-  text-align: center;
-  padding-top: 40px;
+.section {
+  margin-bottom: 2rem;
+}
+input, select, textarea {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+button {
+  padding: 0.5rem 1rem;
+  background-color: #4fe3c1;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
