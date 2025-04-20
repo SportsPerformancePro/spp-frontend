@@ -1,3 +1,4 @@
+import React from 'react';
 export default function App() {
-  return <h1>SPP ZIP 4d Final Ready</h1>;
+  return <h1>Sports Performance Pro - ZIP#4e Functional Build</h1>;
 }
