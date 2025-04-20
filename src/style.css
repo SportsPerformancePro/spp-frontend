@@ -1,1 +1,14 @@
-body { font-family: sans-serif; }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0a0f1c;
+  color: #fff;
+  padding: 20px;
+  margin: 0;
+}
+h1 {
+  color: #4fe3c1;
+}
+.app {
+  text-align: center;
+  padding-top: 40px;
+}
