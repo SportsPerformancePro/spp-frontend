@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #0A0F1A;
+  color: #E5E7EB;
+}
+.app { display: flex; height: 100vh; }
+.sidebar {
+  width: 200px;
+  background: #111827;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar a {
+  color: #9CA3AF;
+  text-decoration: none;
+  margin: 0.5rem 0;
+}
+.sidebar a:hover { color: #FFF; }
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+input, select, textarea, button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #374151;
+  background: #1F2937;
+  color: #E5E7EB;
+}
+button {
+  background: #2563EB;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover { background: #1D4ED8; }
