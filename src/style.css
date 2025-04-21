@@ -1,8 +1,10 @@
-
 body {
   margin: 0;
   font-family: sans-serif;
-  background-color: #0a0a23;
-  color: white;
-  padding: 2rem;
+  background: #0f111a;
+  color: #fff;
 }
+a { text-decoration: none; color: #0af; }
+nav a { margin: 0 1rem; }
+.page { padding: 2rem; }
+button { background: #0af; border: none; padding: 0.5rem 1rem; color: #000; }

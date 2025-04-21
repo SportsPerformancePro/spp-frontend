@@ -1,27 +1,13 @@
-import { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function Signup() {
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
-  const handle = e => {
-    e.preventDefault();
-    alert(`(dummy) Signing up ${email}`);
-  };
+  const nav = useNavigate();
   return (
-    <form onSubmit={handle}>
-      <h2>Sign Up</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={pw}
-        onChange={e => setPw(e.target.value)}
-      />
-      <button type="submit">Sign Up</button>
-    </form>
+    <div className="page">
+      <h2>Create Your Membership</h2>
+      <p>Select Plan: <select><option>Free Trial</option><option>Pro</option><option>Team</option></select></p>
+      <button onClick={() => nav('/profile')}>Continue</button>
+    </div>
   );
 }
