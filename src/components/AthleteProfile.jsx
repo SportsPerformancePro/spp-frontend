@@ -1,17 +1,19 @@
-import React from 'react';
-
-export default function AthleteProfile() {
+import React, { useState } from 'react';
+export default function AthleteProfile({ onSave }) {
+  const [form, setForm] = useState({ name:'', email:'', age:'', sport:'Tennis', ranking:'', experience:'Intermediate' });
+  const handle = (e)=> setForm({...form, [e.target.name]: e.target.value});
   return (
-    <div className="section">
+    <div>
       <h2>Athlete Profile</h2>
-      <form>
-        <input type="text" placeholder="Name" /><br />
-        <input type="email" placeholder="Email" /><br />
-        <input type="number" placeholder="Age" /><br />
-        <select><option>Choose Sport</option><option>Archery</option><option>Tennis</option></select><br />
-        <input type="text" placeholder="Ranking" /><br />
-        <select><option>Experience Level</option><option>Beginner</option><option>Intermediate</option><option>Pro</option></select>
-      </form>
+      <input name="name" placeholder="Name" onChange={handle} />
+      <input name="email" placeholder="Email" onChange={handle} />
+      <input name="age" placeholder="Age" onChange={handle} />
+      <select name="sport" onChange={handle}>
+        <option>Archery</option><option>Golf</option><option>Baseball</option><option>Softball</option><option>Tennis</option><option>Pickleball</option><option>Padel</option>
+      </select>
+      <input name="ranking" placeholder="Ranking" onChange={handle} />
+      <select name="experience" onChange={handle}>
+        <option>Beginner</option><option>Intermediate</option><option>Pro</option>
+      </select>
+      <button onClick={()=>onSave(form)}>Save Profile</button>
     </div>
-  );
-}

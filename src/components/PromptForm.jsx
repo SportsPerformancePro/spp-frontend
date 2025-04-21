@@ -1,11 +1,11 @@
-import React from 'react';
-
-export default function PromptForm() {
+import React, { useState } from 'react';
+export default function PromptForm({ onAnalyze }) {
+  const [prompt, setPrompt] = useState('');
   return (
-    <div className="section">
+    <div>
       <h2>Ask XLevel</h2>
-      <textarea placeholder="What would you like help with?" rows="4" cols="50"></textarea><br />
-      <button>Submit</button>
+      <textarea onChange={e=>setPrompt(e.target.value)} />
+      <button onClick={()=>onAnalyze(prompt)}>Submit to Coach</button>
     </div>
   );
 }
