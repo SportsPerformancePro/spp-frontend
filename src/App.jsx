@@ -1,17 +1,21 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Landing from './components/Landing';
-import Signup from './components/Signup';
-import Profile from './components/Profile';
-import Analytics from './components/Analytics';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import { useAuth } from './contexts/AuthContext';
 
-export default function App() {
+function App() {
+  const { token } = useAuth();
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/profile"
+        element={token ? <Profile /> : <Navigate to="/login" />}
+      />
+      <Route path="*" element={<Navigate to={token ? '/profile' : '/login'} />} />
     </Routes>
   );
 }
+
+export default App;
