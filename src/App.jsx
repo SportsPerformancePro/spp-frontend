@@ -1,46 +1,38 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import AthleteProfile from './components/AthleteProfile.jsx';
-import VideoUpload from './components/VideoUpload.jsx';
-import PromptForm from './components/PromptForm.jsx';
-import CoachFeedback from './components/CoachFeedback.jsx';
-import Sidebar from './components/Sidebar.jsx';
-import ToneToggle from './components/ToneToggle.jsx';
-import './style.css';
+import React, { useState } from 'react'
+import AthleteProfile from './components/AthleteProfile'
+import VideoUploader from './components/VideoUploader'
+import ToneSelector from './components/ToneSelector'
+import CoachFeedback from './components/CoachFeedback'
+import './index.css'
 
 export default function App() {
-  const [profile, setProfile] = useState({});
-  const [video, setVideo] = useState(null);
-  const [feedback, setFeedback] = useState('');
-  const [stillFrame, setStillFrame] = useState('');
-  const [mode, setMode] = useState('Pro');
+  const [profile, setProfile] = useState({})
+  const [videoFile, setVideoFile] = useState(null)
+  const [tone, setTone] = useState('pro')
+  const [feedback, setFeedback] = useState('')
 
-  const handleAnalyze = async (prompt) => {
-    const formData = new FormData();
-    if (video) formData.append('video', video);
-    formData.append('prompt', prompt);
-    formData.append('profile', JSON.stringify(profile));
-    formData.append('mode', mode);
-
-    try {
-      const res = await axios.post('http://localhost:5000/analyze', formData);
-      setFeedback(res.data.feedback);
-      setStillFrame(res.data.stillFrameUrl);
-    } catch (err) {
-      setFeedback('Error contacting server.');
-    }
-  };
+  const handleSubmit = async () => {
+    const form = new FormData()
+    form.append('video', videoFile)
+    form.append('profile', JSON.stringify(profile))
+    form.append('tone', tone)
+    const res = await fetch(\`\${import.meta.env.VITE_API_URL}/api/analyze\`, {
+      method: 'POST', body: form
+    })
+    const json = await res.json()
+    setFeedback(json.feedback || 'Error getting feedback')
+  }
 
   return (
-    <div className="app-container">
-      <Sidebar profile={profile} />
-      <div className="main-content">
-        <AthleteProfile onSave={setProfile} />
-        <VideoUpload onUpload={setVideo} />
-        <ToneToggle mode={mode} onToggle={() => setMode(mode === 'Pro' ? 'Kid' : 'Pro')} />
-        <PromptForm onAnalyze={handleAnalyze} />
-        <CoachFeedback feedback={feedback} stillFrame={stillFrame} />
-      </div>
+    <div className="container">
+      <h1>Sports Performance Pro</h1>
+      <AthleteProfile onChange={setProfile}/>
+      <VideoUploader onFile={setVideoFile}/>
+      <ToneSelector value={tone} onChange={setTone}/>
+      <button disabled={!videoFile} onClick={handleSubmit}>
+        Submit to XLevel Coach
+      </button>
+      <CoachFeedback text={feedback}/>
     </div>
-  );
+  )
 }

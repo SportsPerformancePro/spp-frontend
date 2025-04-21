@@ -1,3 +1,12 @@
-import React from 'react';
-export default function CoachFeedback({ feedback, stillFrame }) {
-  return (<div><h2>Coach Feedback</h2><p>{feedback}</p>{stillFrame && <img src={stillFrame} alt="Still Frame" />}</div>);
+import React from 'react'
+
+export default function CoachFeedback({ text }) {
+  return (
+    <section>
+      <h2>Coach Feedback:</h2>
+      <div style={{background:'#333', padding:'1rem', minHeight:'4rem'}}>
+        {text}
+      </div>
+    </section>
+  )
+}

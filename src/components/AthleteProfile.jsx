@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
-export default function AthleteProfile({ onSave }) {
-  const [form, setForm] = useState({ name:'', email:'', age:'', sport:'Tennis', ranking:'', experience:'Intermediate' });
-  const handle = (e)=> setForm({...form, [e.target.name]: e.target.value});
+import React, { useState, useEffect } from 'react'
+
+export default function AthleteProfile({ onChange }) {
+  const [form, setForm] = useState({
+    name:'', email:'', age:'', sport:'Tennis', ranking:'', level:'Intermediate'
+  })
+
+  useEffect(() => onChange(form), [form, onChange])
+
   return (
-    <div>
+    <section>
       <h2>Athlete Profile</h2>
-      <input name="name" placeholder="Name" onChange={handle} />
-      <input name="email" placeholder="Email" onChange={handle} />
-      <input name="age" placeholder="Age" onChange={handle} />
-      <select name="sport" onChange={handle}>
-        <option>Archery</option><option>Golf</option><option>Baseball</option><option>Softball</option><option>Tennis</option><option>Pickleball</option><option>Padel</option>
+      {['name','email','age','ranking'].map(k=>(
+        <input
+          key={k}
+          placeholder={k}
+          value={form[k]}
+          onChange={e=>setForm(f=>({...f,[k]:e.target.value}))}
+        />
+      ))}
+      <select
+        value={form.sport}
+        onChange={e=>setForm(f=>({...f,sport:e.target.value}))}
+      >
+        {['Tennis','Golf','Baseball','Soccer','Basketball']
+          .map(s=><option key={s}>{s}</option>)}
       </select>
-      <input name="ranking" placeholder="Ranking" onChange={handle} />
-      <select name="experience" onChange={handle}>
-        <option>Beginner</option><option>Intermediate</option><option>Pro</option>
+      <select
+        value={form.level}
+        onChange={e=>setForm(f=>({...f,level:e.target.value}))}
+      >
+        {['Beginner','Intermediate','Pro'].map(l=><option key={l}>{l}</option>)}
       </select>
-      <button onClick={()=>onSave(form)}>Save Profile</button>
-    </div>
+    </section>
+)
+}
