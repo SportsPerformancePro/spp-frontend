@@ -1,32 +1,28 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import Landing from './components/Landing';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Profile from './components/Profile';
-import Upload from './components/Upload';
-import CoachFeedback from './components/CoachFeedback';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './context/AuthContext';
+import Landing from './routes/Landing';
+import Signup from './routes/Signup';
+import Payment from './routes/Payment';
+import Dashboard from './routes/Dashboard';
+import Profile from './routes/Profile';
+import Analytics from './routes/Analytics';
+
+function PrivateRoute({ children }) {
+  const { user } = React.useContext(AuthContext);
+  return user ? children : <Navigate to="/" />;
+}
 
 export default function App() {
   return (
-    <div className="app">
-      <nav className="sidebar">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/upload">Upload</Link>
-        <Link to="/coach">Coach</Link>
-      </nav>
-      <main className="content">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/coach" element={<CoachFeedback />} />
-        </Routes>
-      </main>
-    </div>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/analytics" element={<PrivateRoute><Analytics /></PrivateRoute>} />
+      </Routes>
+    </AuthProvider>
   );
 }
