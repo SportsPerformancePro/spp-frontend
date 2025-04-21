@@ -1,38 +1,41 @@
-import React, { useState } from 'react'
-import AthleteProfile from './components/AthleteProfile'
-import VideoUploader from './components/VideoUploader'
-import ToneSelector from './components/ToneSelector'
-import CoachFeedback from './components/CoachFeedback'
-import './index.css'
+import React, { useState } from 'react';
+import AthleteProfile from './components/AthleteProfile';
+import VideoUploader from './components/VideoUploader';
 
 export default function App() {
-  const [profile, setProfile] = useState({})
-  const [videoFile, setVideoFile] = useState(null)
-  const [tone, setTone] = useState('pro')
-  const [feedback, setFeedback] = useState('')
+  const [profile, setProfile] = useState({});
+  const [feedback, setFeedback] = useState('');
 
-  const handleSubmit = async () => {
-    const form = new FormData()
-    form.append('video', videoFile)
-    form.append('profile', JSON.stringify(profile))
-    form.append('tone', tone)
-    const res = await fetch(\`\${import.meta.env.VITE_API_URL}/api/analyze\`, {
-      method: 'POST', body: form
+  const handleAnalyze = (question, videoFile, sport) => {
+    const formData = new FormData();
+    formData.append('question', question);
+    formData.append('sport', sport);
+    formData.append('name', profile.name);
+    formData.append('experience', profile.experience);
+    formData.append('ranking', profile.ranking);
+
+    fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question, sport, name: profile.name,
+        experience: profile.experience, ranking: profile.ranking
+      })
     })
-    const json = await res.json()
-    setFeedback(json.feedback || 'Error getting feedback')
-  }
+    .then(res => res.json())
+    .then(data => setFeedback(data.feedback))
+    .catch(() => setFeedback('Error contacting server.'));
+  };
 
   return (
-    <div className="container">
+    <div className="app">
       <h1>Sports Performance Pro</h1>
-      <AthleteProfile onChange={setProfile}/>
-      <VideoUploader onFile={setVideoFile}/>
-      <ToneSelector value={tone} onChange={setTone}/>
-      <button disabled={!videoFile} onClick={handleSubmit}>
-        Submit to XLevel Coach
-      </button>
-      <CoachFeedback text={feedback}/>
+      <AthleteProfile onUpdate={setProfile} />
+      <VideoUploader onAnalyze={handleAnalyze} />
+      <section>
+        <h2>Coach Feedback:</h2>
+        <p>{feedback}</p>
+      </section>
     </div>
-  )
+  );
 }

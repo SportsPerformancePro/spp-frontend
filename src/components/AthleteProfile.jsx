@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 
-export default function AthleteProfile({ onChange }) {
+export default function AthleteProfile({ onUpdate }) {
   const [form, setForm] = useState({
-    name:'', email:'', age:'', sport:'Tennis', ranking:'', level:'Intermediate'
-  })
+    name: '', email: '', age:'', sport: 'Golf',
+    ranking:'', experience:'Beginner'
+  });
 
-  useEffect(() => onChange(form), [form, onChange])
+  const handleChange = e => {
+    const { name, value } = e.target;
+    const updated = { ...form, [name]: value };
+    setForm(updated);
+    onUpdate(updated);
+  };
 
   return (
-    <section>
+    <div>
       <h2>Athlete Profile</h2>
-      {['name','email','age','ranking'].map(k=>(
-        <input
-          key={k}
-          placeholder={k}
-          value={form[k]}
-          onChange={e=>setForm(f=>({...f,[k]:e.target.value}))}
-        />
-      ))}
-      <select
-        value={form.sport}
-        onChange={e=>setForm(f=>({...f,sport:e.target.value}))}
-      >
-        {['Tennis','Golf','Baseball','Soccer','Basketball']
-          .map(s=><option key={s}>{s}</option>)}
+      <input name="name" placeholder="Name" onChange={handleChange}/>
+      <input name="email" placeholder="Email" onChange={handleChange}/>
+      <input name="age" placeholder="Age" onChange={handleChange}/>
+      <select name="sport" onChange={handleChange}>
+        <option>Golf</option>
+        <option>Tennis</option>
+        <option>Baseball</option>
       </select>
-      <select
-        value={form.level}
-        onChange={e=>setForm(f=>({...f,level:e.target.value}))}
-      >
-        {['Beginner','Intermediate','Pro'].map(l=><option key={l}>{l}</option>)}
+      <input name="ranking" placeholder="Ranking" onChange={handleChange}/>
+      <select name="experience" onChange={handleChange}>
+        <option>Beginner</option><option>Intermediate</option><option>Pro</option>
       </select>
-    </section>
-)
+    </div>
+  );
 }
