@@ -6,7 +6,7 @@ export default function Profile() {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/profile', {
+    fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())

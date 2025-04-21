@@ -9,10 +9,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route
-        path="/profile"
-        element={token ? <Profile /> : <Navigate to="/login" />}
-      />
+      <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
       <Route path="*" element={<Navigate to={token ? '/profile' : '/login'} />} />
     </Routes>
   );
